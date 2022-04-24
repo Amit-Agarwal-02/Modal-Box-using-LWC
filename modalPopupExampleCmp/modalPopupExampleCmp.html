@@ -1,0 +1,53 @@
+<template>
+    <lightning-card title="Generic Modal box using slot in LWC" icon-name="custom:custom101">
+        <br/>
+        <lightning-button  variant="brand" label="Show First Modal" title="First Slot" onclick={openSlotModal}
+            class="slds-m-left_x-small slds-m-around_small"></lightning-button>
+    </lightning-card>
+
+    <c-generic-modal-pop-up data-modal-id="modalPopUp1">
+        <div slot="content">
+            We are on the First Modal.
+            Now click on the button to create an Account on new modal.
+            <lightning-button variant="brand" label="Create New Account" title="Slot Account" onclick={openSlotModal2}
+                class="slds-m-left_x-small"></lightning-button>
+        </div>
+        <div slot="footer">
+            <lightning-button label="Cancel" title="Cancel" onclick={closeAllModals} class="slds-m-left_x-small slds-m-around_small">
+            </lightning-button>
+        </div>
+        <div slot="header">
+            This is Modal 1
+        </div>
+    </c-generic-modal-pop-up>
+
+    <c-generic-modal-pop-up data-modal-id="modalPopUp2">
+        <div slot="content">
+            <lightning-record-form object-api-name="Account" fields={fields} onsuccess={handleSuccess}>
+            </lightning-record-form>
+        </div>
+        <div slot="header">
+            New Acccount(Modal 2)
+        </div>
+    </c-generic-modal-pop-up>
+
+    <c-generic-modal-pop-up data-modal-id="modalPopUp3">
+        <div slot="content">
+            <p>This is third modal from the same component to show the new account we created in modal 1.</p>
+            <div class="slds-p-bottom_large slds-p-left_large" style="width:500px">
+                <lightning-record-form object-api-name="Account" fields={fields} record-id={accountId} mode="readonly">
+                </lightning-record-form>
+            </div>
+        </div>
+        <div slot="tagline">
+            Displaying New Account
+        </div>
+        <div slot="footer">
+            <lightning-button label="Cancel" title="Cancel" onclick={closeAllModals} class="slds-m-left_x-small">
+            </lightning-button>
+        </div>
+        <div slot="header">
+            Show Account (Third Modal)
+        </div>
+    </c-generic-modal-pop-up>
+</template>
